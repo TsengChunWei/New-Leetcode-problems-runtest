@@ -5,8 +5,8 @@ currpath = os.path.dirname(__file__)
 sys.path.append(os.path.dirname(currpath))
 
 import random
-from Runtest import ListNode, TreeNode
-from Runtest import Tester, SolAlgoTester
+from RuntestPacketge import ListNode, TreeNode
+from RuntestPacketge import Tester, SolAlgoTester
 
 class compare:
     def f1(self, head):
@@ -26,7 +26,7 @@ class compare:
             slow = slow.next
             fast = fast.next.next
         return slow
-            
+              
 
     def SolAlgo(self, head):
         fast = slow = head
@@ -40,18 +40,23 @@ class compare:
             half -= 1
         return slow
 
-
+"""
+Constraints:
+● The number of nodes in the list is in the range [1, 100].
+● 1 <= Node.val <= 100
+"""
 def TestExample(max_length = 100):
-    inputInList = [i+1 for i in range(max_length)]
-    return [inputInList]
+    input = [i+1 for i in range(max_length)]
+    return [input]
 
 # ================================
 # ================================
 # ================================
-times = 2048
+times = 4096
 input = TestExample()
 to_ = [0]
 Cp = compare()
+# "", "linklist", "treenode". "class"
 Type = "linklist"
 
 print("\nThe Efficiency Comparison of Various Algorithms through Time Testing :\n")

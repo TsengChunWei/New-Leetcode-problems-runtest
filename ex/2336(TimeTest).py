@@ -6,10 +6,10 @@ currpath = os.path.dirname(__file__)
 sys.path.append(os.path.dirname(currpath))
 
 import random
-from Runtest import ListNode, TreeNode
-from Runtest import Tester, SolAlgoTester
+from RuntestPacketge import ListNode, TreeNode
+from RuntestPacketge import classTester, SolClassTester
 
-class compare1:
+class class1:
     def __init__(self):
         self.min = 1
         self.add = []
@@ -28,7 +28,7 @@ class compare1:
 
     
 
-class SolutionAlgorithm():
+class SolClass():
     def __init__(self):
         self.cur_integer = 1
         self.added = []
@@ -50,6 +50,22 @@ class SolutionAlgorithm():
         self.present.add(num)
 
 
+
+def RunClass(cls, ModelValue):
+    Ans = [None]
+    for model, value in zip(ModelValue[0][1:], ModelValue[1][1:]):
+        if model == "popSmallest":
+            sol = cls.popSmallest()
+        elif model == "addBack":
+            sol = cls.addBack(value[0])
+        Ans.append(sol)
+    return Ans
+
+"""
+Constraints:
+● 1 <= num <= 1000
+● At most 1000 calls will be made in total to popSmallest and addBack.
+"""
 def TestExample(max_num = 1000):
     length = max_num
     Model = ["Class"]*length
@@ -68,12 +84,9 @@ def TestExample(max_num = 1000):
 # ================================
 # ================================
 # ================================
-times = 2048
+times = 128
 input = TestExample()
-to_ = [0]
-Type = "linklist"
 
 print("\nThe Efficiency Comparison of Various Algorithms through Time Testing :\n")
-sol_answer = SolAlgoTester(Type, Cp.SolAlgo, input, to_, times, True)
-Tester(Type, "f1", Cp.f1, input, to_, times, sol_answer, True)
-Tester(Type, "f2", Cp.f2, input, to_, times, sol_answer, True)
+sol_answer = SolClassTester(RunClass, SolClass(), input, times)
+classTester("class1", RunClass, class1(), input, times, sol_answer)

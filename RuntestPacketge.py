@@ -165,3 +165,33 @@ def SolAlgoTester(data_structure, algorithm, input, to_, times, output_type_tran
     print(f"Solution: {Runtime(algorithm, input, times)}")
     return sol_answer
 
+
+def classRuntime(RunClass, cls, input, times):
+    temp = time.time()
+    for _ in range(times):
+        _ = RunClass(cls, input.copy())
+    t = 1000*(time.time()-temp)
+    t /= times
+    ms, mus = int(t), round(1000*(t-int(t)), 3)
+    testtime: str
+    if ms == 0 and mus < 10:
+        testtime = "{} µs".format(mus)
+    elif ms == 0 and mus >= 10:
+        testtime = "{} µs".format(int(mus))
+    else:
+        testtime = "{} ms, {} µs".format(ms, int(mus))
+    return testtime
+
+def classTester(name, RunClass, cls, input, times, sol_answer):
+    answer = RunClass(cls, input.copy())
+    testtime = classRuntime(RunClass, cls, input, times)
+    if answer == sol_answer:
+        print("{}: (Exactly) {}".format(name, testtime))
+    else:
+        print("{}: ( Wrong ) {}".format(name, testtime))
+    return
+
+def SolClassTester(RunClass, cls, input, times):
+    sol_answer = RunClass(cls, input)
+    print(f"Solution: {classRuntime(RunClass, cls, input, times)}")
+    return sol_answer
